@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml (v0.4): repo-root metadata for formalization projects.
+
+version: "v0.4"
+
+project:
+  name: "A certificate for the triangle variational problem"
+  description: >-
+    A Lean formalization of a technical lemma in the paper "Nonlinear lower-tail large deviations at criticality" by Matthew Kwan and Huy Tuan Pham. This lemma is used to solve a certain variational problem, which is necessary to characterise the probability that a random graph is triangle-free in the so-called "critical regime" where the edge probability is of order 1 / sqrt n.
+    
+    Specifically, this lemma defines a "certificate function" G and proves that it satisfies a certain inequality. This involves lots of interval arithmetic. 
+  authors:
+    - "Matthew Kwan"
+    - "Huy Tuan Pham"
+  license: "MIT"
+
+sources:
+  - title: "Nonlinear lower-tail large deviations at criticality"
+    authors:
+      - "Matthew Kwan"
+      - "Huy Tuan Pham"
+    type: "article"
+
+status:
+  scope: >-
+    The sole advertised result is
+    TriangleNumerical.entropy_certificate :
+    TriangleNumerical.EntropyCertificateProposition.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+
+automation:
+  methods:
+    - method: "agent"
+      framework: "Aristotle (Harmonic)"
+
+review:
+  status: "self-assessed"
+  notes: >-
+    The submitting researcher reports a successful local Comparator run for
+    the entropy-only theorem using the three standard permitted axioms.
+
+acknowledgements: >-
+  The proof uses Lean and Mathlib. The code was entirely written by Harmonic's Aristotle, with some feedback from the authors assisted by OpenAI's ChatGPT 5.6 Pro.
