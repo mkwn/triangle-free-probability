@@ -19,7 +19,6 @@ def IsTwoBlockMinimum (α M : ℝ) : Prop :=
   (∀ r ∈ unitInterval, ∀ t ∈ unitInterval,
     M ≤ twoBlockObjective α r t)
 
-/-- The stronger weight-coordinate inequality used in the appendix. -/
 def entropyF (α : ℝ) (G : ℝ → ℝ) (a b c : ℝ) : ℝ :=
   (H a + H b + H c) / 3 + α * a * b * c
     - (G a * G b + G a * G c + G b * G c)
