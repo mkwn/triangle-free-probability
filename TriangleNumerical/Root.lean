@@ -1,5 +1,9 @@
-import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
-import TriangleNumerical.AlgebraTasks
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
+public import TriangleNumerical.AlgebraTasks
+
+@[expose] public section
 
 /-!
 # Entropy facts, the constant root, and the minimum criterion
@@ -29,7 +33,9 @@ theorem hasDerivAt_H {w : ℝ} (hw : w ≠ 0) : HasDerivAt H (Real.log w) w := b
     simpa using (Real.hasDerivAt_mul_log hw)
   have h2 : HasDerivAt (fun x : ℝ => 1 - x) (-1) w := by
     simpa using (hasDerivAt_id w).const_sub 1
-  simpa using h2.add h1
+  unfold H
+  convert h2.fun_add h1 using 1
+  all_goals first | rfl | ring
 
 /-- `H` is nonincreasing on `(0,1]` and nondecreasing on `[1,∞)`; we only need
 the monotone-decreasing part on `[0,1]`. -/

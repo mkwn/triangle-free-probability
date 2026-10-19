@@ -1,7 +1,11 @@
-import Mathlib.Tactic
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import TriangleNumerical.Kernel
+module
+
+public import Mathlib.Tactic
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+public import TriangleNumerical.Kernel
+
+@[expose] public section
 
 /-!
 # Kernel-checkable dyadic interval arithmetic
@@ -219,10 +223,10 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
   obtain ⟨c, d⟩ := j
   by_cases hord : a ≤ b ∧ c ≤ d
   · obtain ⟨hi, hj⟩ := hord
-    simp only [mul, mulGen, hi, hj, and_self, not_true, if_false]
+    simp only [mul, mulGen, hi, hj, and_self, not_true, ite_false]
     by_cases ha : 0 ≤ a
     · by_cases hc : 0 ≤ c
-      · simp only [ha, hc, if_true]
+      · simp only [ha, hc, ite_true]
         have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = a * c :=
           min4_eq (Or.inl rfl) (by nlinarith) (by nlinarith) (by nlinarith)
             (by nlinarith)
@@ -231,7 +235,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
             (by nlinarith)
         rw [h1, h2]
       · by_cases hd : d ≤ 0
-        · simp only [ha, hc, hd, if_true, if_false]
+        · simp only [ha, hc, hd, ite_true, ite_false]
           have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = b * c :=
             min4_eq (Or.inr (Or.inr (Or.inl rfl))) (by nlinarith) (by nlinarith) (by nlinarith)
               (by nlinarith)
@@ -239,7 +243,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
             max4_eq (Or.inr (Or.inl rfl)) (by nlinarith) (by nlinarith) (by nlinarith)
               (by nlinarith)
           rw [h1, h2]
-        · simp only [ha, hc, hd, if_true, if_false]
+        · simp only [ha, hc, hd, ite_true, ite_false]
           have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = b * c :=
             min4_eq (Or.inr (Or.inr (Or.inl rfl))) (by nlinarith) (by nlinarith) (by nlinarith)
               (by nlinarith)
@@ -249,7 +253,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
           rw [h1, h2]
     · by_cases hb : b ≤ 0
       · by_cases hc : 0 ≤ c
-        · simp only [ha, hb, hc, if_true, if_false]
+        · simp only [ha, hb, hc, ite_true, ite_false]
           have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = a * d :=
             min4_eq (Or.inr (Or.inl rfl)) (by nlinarith) (by nlinarith) (by nlinarith)
               (by nlinarith)
@@ -258,7 +262,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
               (by nlinarith)
           rw [h1, h2]
         · by_cases hd : d ≤ 0
-          · simp only [ha, hb, hc, hd, if_true, if_false]
+          · simp only [ha, hb, hc, hd, ite_true, ite_false]
             have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = b * d :=
               min4_eq (Or.inr (Or.inr (Or.inr rfl))) (by nlinarith) (by nlinarith) (by nlinarith)
                 (by nlinarith)
@@ -266,7 +270,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
               max4_eq (Or.inl rfl) (by nlinarith) (by nlinarith) (by nlinarith)
                 (by nlinarith)
             rw [h1, h2]
-          · simp only [ha, hb, hc, hd, if_true, if_false]
+          · simp only [ha, hb, hc, hd, ite_true, ite_false]
             have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = a * d :=
               min4_eq (Or.inr (Or.inl rfl)) (by nlinarith) (by nlinarith) (by nlinarith)
                 (by nlinarith)
@@ -275,7 +279,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
                 (by nlinarith)
             rw [h1, h2]
       · by_cases hc : 0 ≤ c
-        · simp only [ha, hb, hc, if_true, if_false]
+        · simp only [ha, hb, hc, ite_true, ite_false]
           have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = a * d :=
             min4_eq (Or.inr (Or.inl rfl)) (by nlinarith) (by nlinarith) (by nlinarith)
               (by nlinarith)
@@ -284,7 +288,7 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
               (by nlinarith)
           rw [h1, h2]
         · by_cases hd : d ≤ 0
-          · simp only [ha, hb, hc, hd, if_true, if_false]
+          · simp only [ha, hb, hc, hd, ite_true, ite_false]
             have h1 : min (min (a * c) (a * d)) (min (b * c) (b * d)) = b * c :=
               min4_eq (Or.inr (Or.inr (Or.inl rfl))) (by nlinarith) (by nlinarith) (by nlinarith)
                 (by nlinarith)
@@ -292,8 +296,8 @@ theorem mul_eq_mulGen (i j : DI) : mul i j = mulGen i j := by
               max4_eq (Or.inl rfl) (by nlinarith) (by nlinarith) (by nlinarith)
                 (by nlinarith)
             rw [h1, h2]
-          · simp only [ha, hb, hc, hd, if_false]
-  · simp only [mul, hord, not_false_eq_true, if_true]
+          · simp only [ha, hb, hc, hd, ite_false]
+  · simp only [mul, hord, not_false_eq_true, ite_true]
 
 theorem mem_mul {i j : DI} {x y : ℝ} (hx : i.Mem x) (hy : j.Mem y) :
     (mul i j).Mem (x * y) := by

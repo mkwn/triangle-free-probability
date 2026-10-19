@@ -1,4 +1,8 @@
-import TriangleNumerical.EntropyBasics
+module
+
+public import TriangleNumerical.EntropyBasics
+
+@[expose] public section
 
 /-!
 Short algebraic milestones from the integrated shortcuts.

@@ -1,5 +1,9 @@
-import TriangleNumerical.Deriv
-import TriangleNumerical.SpatialEval
+module
+
+public import TriangleNumerical.Deriv
+public import TriangleNumerical.SpatialEval
+
+@[expose] public section
 
 /- ### From `TailBounds` -/
 

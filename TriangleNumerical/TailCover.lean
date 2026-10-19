@@ -1,7 +1,11 @@
-import TriangleNumerical.CoverTree
-import TriangleNumerical.TailEval
-import TriangleNumerical.TailData
-import TriangleNumerical.TailChunk0
+module
+
+public import TriangleNumerical.CoverTree
+public import TriangleNumerical.TailEval
+public import TriangleNumerical.TailData
+public import TriangleNumerical.TailChunk0
+
+@[expose] public section
 
 /- ### From `TailTree` -/
 

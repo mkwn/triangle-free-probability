@@ -1,7 +1,11 @@
-import TriangleNumerical.CoverTree
-import TriangleNumerical.SlabA2Data
-import TriangleNumerical.ParamEval
-import TriangleNumerical.SlabA2Chunk0
+module
+
+public import TriangleNumerical.CoverTree
+public import TriangleNumerical.SlabA2Data
+public import TriangleNumerical.ParamEval
+public import TriangleNumerical.SlabA2Chunk0
+
+@[expose] public section
 
 /-! # Sub-slab 2: endpoint certificates, branch parameters and the
 assembled cube bound.

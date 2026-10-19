@@ -1,4 +1,8 @@
-import TriangleNumerical.Statement
+module
+
+public import TriangleNumerical.Statement
+
+@[expose] public section
 
 /-!
 Basic entropy lemmas used by the entropy-certificate proof.

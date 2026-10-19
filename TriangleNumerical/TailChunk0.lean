@@ -1,4 +1,8 @@
-import TriangleNumerical.TailData
+module
+
+public import TriangleNumerical.TailData
+
+@[expose] public section
 
 /-! # TailChunk0 (generated). -/
 set_option autoImplicit false

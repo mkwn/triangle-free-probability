@@ -1,4 +1,8 @@
-import TriangleNumerical.Deriv
+module
+
+public import TriangleNumerical.Deriv
+
+@[expose] public section
 
 /-!
 # Analytic region A: all three weights at most 1/10
@@ -121,7 +125,7 @@ theorem log_ten_lt : Real.log 10 < 7 / 3 := by
     rw [← Real.exp_nat_mul]; norm_num
   have h10 : (10 : ℝ) < Real.exp (7 / 3) := by
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     have hpos : (0:ℝ) < Real.exp (7 / 3) := Real.exp_pos _
     have hle : (Real.exp (7 / 3)) ^ 3 ≤ (10 : ℝ) ^ 3 := pow_le_pow_left₀ hpos.le hcon 3
     rw [hcube] at hle
@@ -142,7 +146,7 @@ theorem log_ten_gt : (23 / 10 : ℝ) < Real.log 10 := by
     rw [← Real.exp_nat_mul]; norm_num
   have h10 : Real.exp (23 / 10) < 10 := by
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     have hge : (10:ℝ) ^ 10 ≤ (Real.exp (23 / 10)) ^ 10 := pow_le_pow_left₀ (by norm_num) hcon 10
     rw [hpow] at hge
     linarith

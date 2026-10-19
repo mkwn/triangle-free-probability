@@ -1,4 +1,8 @@
-import TriangleNumerical.CubicData
+module
+
+public import TriangleNumerical.CubicData
+
+@[expose] public section
 
 /-! # CubicChunk0 (generated). -/
 set_option autoImplicit false

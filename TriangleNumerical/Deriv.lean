@@ -1,5 +1,9 @@
-import TriangleNumerical.Root
-import Mathlib.Analysis.Complex.ExponentialBounds
+module
+
+public import TriangleNumerical.Root
+public import Mathlib.Analysis.Complex.ExponentialBounds
+
+@[expose] public section
 
 /- ### From `Branch` -/
 
@@ -248,13 +252,13 @@ theorem mul_exp_neg_antitone : AntitoneOn (fun x : ℝ => x * Real.exp (-x)) (Se
   apply antitoneOn_of_deriv_nonpos (convex_Ici 1) (by fun_prop)
   · intro x hx
     exact ((hasDerivAt_id x).mul ((Real.hasDerivAt_exp (-x)).comp x
-      (by simpa using (hasDerivAt_id x).neg))).differentiableAt.differentiableWithinAt
+      (by simpa using (hasDerivAt_id x).fun_neg))).differentiableAt.differentiableWithinAt
   · intro x hx
     rw [interior_Ici] at hx
     have hd : HasDerivAt (fun x : ℝ => x * Real.exp (-x))
         (1 * Real.exp (-x) + x * (Real.exp (-x) * -1)) x :=
       (hasDerivAt_id x).mul ((Real.hasDerivAt_exp (-x)).comp x
-        (by simpa using (hasDerivAt_id x).neg))
+        (by simpa using (hasDerivAt_id x).fun_neg))
     rw [hd.deriv]
     have hx1 : (1:ℝ) < x := hx
     have := Real.exp_pos (-x)
@@ -266,13 +270,13 @@ theorem sq_mul_exp_neg_antitone :
   apply antitoneOn_of_deriv_nonpos (convex_Ici 2) (by fun_prop)
   · intro x hx
     exact (((hasDerivAt_id x).pow 2).mul ((Real.hasDerivAt_exp (-x)).comp x
-      (by simpa using (hasDerivAt_id x).neg))).differentiableAt.differentiableWithinAt
+      (by simpa using (hasDerivAt_id x).fun_neg))).differentiableAt.differentiableWithinAt
   · intro x hx
     rw [interior_Ici] at hx
     have hd : HasDerivAt (fun x : ℝ => x ^ 2 * Real.exp (-x))
         ((2 * x ^ 1 * 1) * Real.exp (-x) + x ^ 2 * (Real.exp (-x) * -1)) x :=
       ((hasDerivAt_id x).pow 2).mul ((Real.hasDerivAt_exp (-x)).comp x
-        (by simpa using (hasDerivAt_id x).neg))
+        (by simpa using (hasDerivAt_id x).fun_neg))
     rw [hd.deriv]
     have hx1 : (2:ℝ) < x := hx
     have hexp := Real.exp_pos (-x)
@@ -593,8 +597,8 @@ def etaD2 (θ X : ℝ) : ℝ := -2 + θ * (6 * X - 4)
 
 theorem hasDerivAt_etaT (θ X : ℝ) : HasDerivAt (etaT θ) (etaD θ X) X := by
   have h1 : HasDerivAt (fun x : ℝ => x) 1 X := hasDerivAt_id X
-  have h2 : HasDerivAt (fun x : ℝ => x ^ 2) (2 * X) X := by simpa using h1.pow 2
-  have h3 : HasDerivAt (fun x : ℝ => x ^ 3) (3 * X ^ 2) X := by simpa using h1.pow 3
+  have h2 : HasDerivAt (fun x : ℝ => x ^ 2) (2 * X) X := by simpa using h1.fun_pow 2
+  have h3 : HasDerivAt (fun x : ℝ => x ^ 3) (3 * X ^ 2) X := by simpa using h1.fun_pow 3
   have h : HasDerivAt (fun x : ℝ => 3 * x - x ^ 2 - 1 + θ * (x - 2 * x ^ 2 + x ^ 3))
       (3 * 1 - 2 * X - 0 + θ * (1 - 2 * (2 * X) + 3 * X ^ 2)) X :=
     (((h1.const_mul 3).sub h2).sub (hasDerivAt_const X (1:ℝ))).add
@@ -607,7 +611,7 @@ theorem hasDerivAt_etaT (θ X : ℝ) : HasDerivAt (etaT θ) (etaD θ X) X := by
 
 theorem hasDerivAt_etaD (θ X : ℝ) : HasDerivAt (etaD θ) (etaD2 θ X) X := by
   have h1 : HasDerivAt (fun x : ℝ => x) 1 X := hasDerivAt_id X
-  have h2 : HasDerivAt (fun x : ℝ => x ^ 2) (2 * X) X := by simpa using h1.pow 2
+  have h2 : HasDerivAt (fun x : ℝ => x ^ 2) (2 * X) X := by simpa using h1.fun_pow 2
   have h : HasDerivAt (fun x : ℝ => 3 - 2 * x + θ * (1 - 4 * x + 3 * x ^ 2))
       (0 - 2 * 1 + θ * (0 - 4 * 1 + 3 * (2 * X))) X :=
     ((hasDerivAt_const X (3:ℝ)).sub (h1.const_mul 2)).add
@@ -628,7 +632,7 @@ def bDd2 (h w : ℝ) : ℝ := 1 / w + 2 * bBeta h
 theorem hasDerivAt_bD (h : ℝ) {w : ℝ} (hw : w ≠ 0) :
     HasDerivAt (bD h) (bDd h w) w := by
   have h1 : HasDerivAt (fun x : ℝ => x) 1 w := hasDerivAt_id w
-  have h2 : HasDerivAt (fun x : ℝ => x ^ 2) (2 * w) w := by simpa using h1.pow 2
+  have h2 : HasDerivAt (fun x : ℝ => x ^ 2) (2 * w) w := by simpa using h1.fun_pow 2
   have hd : HasDerivAt (fun x : ℝ => H x + bBeta h * x ^ 2 - bC h)
       (Real.log w + bBeta h * (2 * w)) w :=
     ((hasDerivAt_H hw).add (h2.const_mul (bBeta h))).sub_const _
@@ -685,7 +689,7 @@ theorem hasDerivAt_bGd (h θ : ℝ) {w : ℝ} (hw : w ≠ 0) :
         + etaD θ (bX h w) * (bDd2 h w / bDelta h)) w := h1.mul h2
   have h4 := h3.const_mul (Real.sqrt (bDelta h / 6))
   convert h4 using 1
-  simp only [bGd2]; ring
+  all_goals first | rfl | (simp only [bGd2]; ring)
 
 /-! ### The spatial derivatives of `Φ` -/
 

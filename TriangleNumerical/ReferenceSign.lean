@@ -1,5 +1,9 @@
-import TriangleNumerical.RefDefs
-import TriangleNumerical.ReferencePilot
+module
+
+public import TriangleNumerical.RefDefs
+public import TriangleNumerical.ReferencePilot
+
+@[expose] public section
 
 /-!
 # The reference sign (R1)

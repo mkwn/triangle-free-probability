@@ -1,4 +1,8 @@
-import TriangleNumerical.SlabA2Data
+module
+
+public import TriangleNumerical.SlabA2Data
+
+@[expose] public section
 
 /-! # SlabA2Chunk0 (generated). -/
 set_option autoImplicit false

@@ -1,5 +1,9 @@
-import TriangleNumerical.HighCoord
-import TriangleNumerical.LocalSmall
+module
+
+public import TriangleNumerical.HighCoord
+public import TriangleNumerical.LocalSmall
+
+@[expose] public section
 
 /-!
 # The small coordinate range `0 < x ≤ 1/10`

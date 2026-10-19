@@ -1,5 +1,9 @@
-import TriangleNumerical.TailEval
-import TriangleNumerical.LocalLarge
+module
+
+public import TriangleNumerical.TailEval
+public import TriangleNumerical.LocalLarge
+
+@[expose] public section
 
 /- ### From `SideRec` -/
 
@@ -52,7 +56,7 @@ theorem mem_epH {c : LogNegCert} (h : epOk c = true) : (epH c).Mem (H (value c.a
   simp only [epOk, Bool.or_eq_true, beq_iff_eq] at h
   rcases h with h | h
   · have hz : value c.a = 0 := by simp [value, h]
-    simp only [epH, h, beq_self_eq_true, if_true]
+    simp only [epH, h, beq_self_eq_true, ite_true]
     rw [show value (0 : Int) = 0 by simp [value]]
     exact mem_HzeroI
   · have hne : ¬ (c.a == 0) = true := by
@@ -60,7 +64,7 @@ theorem mem_epH {c : LogNegCert} (h : epOk c = true) : (epH c).Mem (H (value c.a
       intro h0
       simp only [logNegOk, Bool.and_eq_true, decide_eq_true_eq, h0] at h
       omega
-    simp only [epH, if_neg hne]
+    simp only [epH, ite_eq_right hne]
     exact mem_HptI h
 
 theorem mem_epL {c : LogNegCert} (h : epOk c = true) (hpos : 0 < c.a) :
@@ -492,13 +496,13 @@ theorem LgenA_centered {h θ : ℝ} (hh : 0 < h) (A : ℝ)
 
 theorem value_le_imax_left (a b : Int) : value a ≤ value (imax a b) := by
   by_cases h : a ≤ b
-  · simp only [imax, if_pos h]; exact value_mono h
-  · simp only [imax, if_neg h]; exact le_refl _
+  · simp only [imax, ite_eq_left h]; exact value_mono h
+  · simp only [imax, ite_eq_right h]; exact le_refl _
 
 theorem value_le_imax_right (a b : Int) : value b ≤ value (imax a b) := by
   by_cases h : a ≤ b
-  · simp only [imax, if_pos h]; exact le_refl _
-  · simp only [imax, if_neg h]; exact value_mono (by omega)
+  · simp only [imax, ite_eq_left h]; exact le_refl _
+  · simp only [imax, ite_eq_right h]; exact value_mono (by omega)
 
 /-- An upper bound for the absolute value of a member of an interval. -/
 theorem abs_le_absBound {d : DI} {x : ℝ} (hx : d.Mem x) :

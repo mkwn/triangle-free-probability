@@ -1,4 +1,8 @@
-import TriangleNumerical.Endpoints
+module
+
+public import TriangleNumerical.Endpoints
+
+@[expose] public section
 
 /-! # SlabA3Data: endpoint certificates, parameter data and materialised side records.
 

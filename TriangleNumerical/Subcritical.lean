@@ -1,4 +1,8 @@
-import TriangleNumerical.Rescale
+module
+
+public import TriangleNumerical.Rescale
+
+@[expose] public section
 
 /-!
 # From one reference certificate to every smaller parameter

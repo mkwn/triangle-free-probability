@@ -1,4 +1,8 @@
-import TriangleNumerical.Endpoints
+module
+
+public import TriangleNumerical.Endpoints
+
+@[expose] public section
 
 /-! # TailData: endpoint certificates, parameter data and materialised side records.
 

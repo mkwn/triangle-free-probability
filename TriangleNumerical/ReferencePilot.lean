@@ -1,5 +1,9 @@
-import TriangleNumerical.Statement
-import TriangleNumerical.LogLadder
+module
+
+public import TriangleNumerical.Statement
+public import TriangleNumerical.LogLadder
+
+@[expose] public section
 
 /-!
 Root-free reference inequality (R0) of the blueprint, replayed with

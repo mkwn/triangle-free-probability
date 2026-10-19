@@ -1,4 +1,8 @@
-import TriangleNumerical.Root
+module
+
+public import TriangleNumerical.Root
+
+@[expose] public section
 
 /-!
 # Rescaling from a reference parameter to all smaller parameters
@@ -116,7 +120,7 @@ theorem root_mono {α α₀ s s₀ : ℝ} (hs : 0 < s) (hs1 : s ≤ 1) (hs₀ : 
     (hroot : rootResidual α s = 0) (hroot₀ : rootResidual α₀ s₀ = 0)
     (hlt : α ≤ α₀) (hα₀ : 0 < α₀) : s₀ ≤ s := by
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   have hlogs : Real.log s = -(3 * α * s ^ 2) := by
     simp only [rootResidual] at hroot; linarith
   have hlogs₀ : Real.log s₀ = -(3 * α₀ * s₀ ^ 2) := by

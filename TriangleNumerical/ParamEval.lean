@@ -1,5 +1,9 @@
-import TriangleNumerical.LogInterval
-import TriangleNumerical.Deriv
+module
+
+public import TriangleNumerical.LogInterval
+public import TriangleNumerical.Deriv
+
+@[expose] public section
 
 /-!
 # Certified enclosures of the branch parameters over an interval of `h`

@@ -1,5 +1,9 @@
-import TriangleNumerical.Deriv
-import TriangleNumerical.LogInterval
+module
+
+public import TriangleNumerical.Deriv
+public import TriangleNumerical.LogInterval
+
+@[expose] public section
 
 /- ### From `Cover` -/
 
@@ -124,7 +128,7 @@ theorem le_of_excludes_root {Φ : ℝ → ℝ → ℝ → ℝ} {M : ℝ} (hs : S
   obtain ⟨m₁, m₂, m₃, hmem, hmin⟩ := exists_min hc
   intro w₁ w₂ w₃ h₁ h₂ h₃
   by_contra hlt
-  push_neg at hlt
+  push Not at hlt
   have hmlt : Φ m₁ m₂ m₃ < M := lt_of_le_of_lt (hmin w₁ w₂ w₃ h₁ h₂ h₃) hlt
   obtain ⟨x, y, z, hxy, hyz, hval, hmemx, hmemy, hmemz⟩ := exists_sorted hs m₁ m₂ m₃
   have hcube : ∀ u : ℝ, (u = m₁ ∨ u = m₂ ∨ u = m₃) → 0 ≤ u ∧ u ≤ 1 := by
@@ -201,7 +205,7 @@ theorem not_min_of_deriv_neg {g : ℝ → ℝ} {w d : ℝ} (hd : HasDerivAt g d 
   have hd0 : HasDerivAt g d (1 - (1 - w)) := by simpa using hd
   have hd2 := HasDerivAt.comp (1 - w) hd0 hin
   have hd' : HasDerivAt (fun x : ℝ => g (1 - x)) (-d) (1 - w) := by
-    simpa [Function.comp] using hd2
+    convert hd2 using 1 <;> first | rfl | simp
   refine not_min_of_deriv_pos (g := fun x : ℝ => g (1 - x)) (w := 1 - w) (d := -d) hd'
     (by linarith) (by linarith) ?_ (by linarith)
   intro x hx0 hx1

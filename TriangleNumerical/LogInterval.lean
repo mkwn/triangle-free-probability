@@ -1,5 +1,9 @@
-import TriangleNumerical.Interval
-import TriangleNumerical.LogLadder
+module
+
+public import TriangleNumerical.Interval
+public import TriangleNumerical.LogLadder
+
+@[expose] public section
 
 /-!
 # Computable logarithm and exponential enclosures

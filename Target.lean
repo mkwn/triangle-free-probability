@@ -1,4 +1,8 @@
-import TriangleNumerical.Assembly
+module
+
+public import TriangleNumerical.Assembly
+
+@[expose] public section
 
 /-!
 Final proof entry point: only the entropy-certificate theorem is requested.

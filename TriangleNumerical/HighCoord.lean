@@ -1,5 +1,9 @@
-import TriangleNumerical.ScalarAux
-import TriangleNumerical.Deriv
+module
+
+public import TriangleNumerical.ScalarAux
+public import TriangleNumerical.Deriv
+
+@[expose] public section
 
 /-!
 # The high coordinate range `19/20 ≤ w ≤ 1`

@@ -1,5 +1,9 @@
-import TriangleNumerical.Subcritical
-import TriangleNumerical.Deriv
+module
+
+public import TriangleNumerical.Subcritical
+public import TriangleNumerical.Deriv
+
+@[expose] public section
 
 /-!
 # The reference parameter and the chosen constant roots

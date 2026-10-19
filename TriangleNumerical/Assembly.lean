@@ -1,15 +1,19 @@
-import TriangleNumerical.ReferenceSign
-import TriangleNumerical.CubicCover
-import TriangleNumerical.SlabA0Cover
-import TriangleNumerical.SlabA1Cover
-import TriangleNumerical.SlabA2Cover
-import TriangleNumerical.SlabA3Cover
-import TriangleNumerical.SlabA4Cover
-import TriangleNumerical.SlabA5Cover
-import TriangleNumerical.SlabA6Cover
-import TriangleNumerical.SlabA7Cover
-import TriangleNumerical.SlabA8Cover
-import TriangleNumerical.TailCover
+module
+
+public import TriangleNumerical.ReferenceSign
+public import TriangleNumerical.CubicCover
+public import TriangleNumerical.SlabA0Cover
+public import TriangleNumerical.SlabA1Cover
+public import TriangleNumerical.SlabA2Cover
+public import TriangleNumerical.SlabA3Cover
+public import TriangleNumerical.SlabA4Cover
+public import TriangleNumerical.SlabA5Cover
+public import TriangleNumerical.SlabA6Cover
+public import TriangleNumerical.SlabA7Cover
+public import TriangleNumerical.SlabA8Cover
+public import TriangleNumerical.TailCover
+
+@[expose] public section
 
 /-!
 # Assembly of the entropy certificate

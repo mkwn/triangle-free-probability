@@ -1,6 +1,10 @@
-import TriangleNumerical.SmallCoord
-import TriangleNumerical.LineDeriv
-import TriangleNumerical.Segment
+module
+
+public import TriangleNumerical.SmallCoord
+public import TriangleNumerical.LineDeriv
+public import TriangleNumerical.Segment
+
+@[expose] public section
 
 /-!
 # Analytic region B: one small and two large weights
@@ -103,7 +107,7 @@ theorem hasDerivAt_phiX_obj (y z : ℝ) {x : ℝ} (hx : x ≠ 0) :
     convert this using 1
     ring
   have := (hH.add hcube).sub hpair
-  convert this using 1
+  convert this using 1 <;> rfl
 
 /-- The second derivative in the small coordinate. -/
 def phiXX (h θ x y z : ℝ) : ℝ :=
@@ -118,8 +122,7 @@ theorem hasDerivAt_phiX (y z : ℝ) {x : ℝ} (hx : x ≠ 0) :
       (bGd2 h θ x * (bG h θ y + bG h θ z)) x := hg.mul_const _
   have := (hlog.add_const (bAlpha h * y * z)).sub hpair
   convert this using 1
-  simp only [phiXX]
-  field_simp
+  all_goals first | rfl | (simp only [phiXX]; field_simp)
 
 /-- Stationarity of `Φ` at `(r,t,t)` in the first coordinate. -/
 theorem phiX_at_sharp (hh : 0 < h) : phiX h θ (br h) (bt h) (bt h) = 0 := by
@@ -300,7 +303,7 @@ theorem hess_xy (hh : 9 ≤ h) (hθ1 : -(1 / 50 : ℝ) ≤ θ) (hθ0 : θ ≤ 0)
     have hkey : x * (-Real.log x) * (30 * (bAlpha h) ^ 2) ≤ 5 + bAlpha h / 3 :=
       (le_div_iff₀ (by positivity)).mp hxl
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     nlinarith [mul_pos hα0 (sub_pos.2 hcon), hα]
   have e3 : x * (Real.log x) ^ 2 ≤ 49 / 1080 := by
     have h2 : (5 + bAlpha h / 3) ^ 2 / (30 * (bAlpha h) ^ 2) ≤ 49 / 1080 := by

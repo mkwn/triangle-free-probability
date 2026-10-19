@@ -13,19 +13,31 @@ project:
     - "Matthew Kwan"
     - "Huy Tuan Pham"
   license: "MIT"
+  responsible_maintainers:
+    - "Matthew Kwan"
+
+classification:
+  arxiv: ["math.CO", "math.PR"]
+  msc2020: ["05C80", "60F10"]
 
 sources:
   - title: "Nonlinear lower-tail large deviations at criticality"
     authors:
       - "Matthew Kwan"
       - "Huy Tuan Pham"
-    type: "article"
+    type: "paper"
+    relationship: "formalizes"
+    url: "https://arxiv.org/abs/2610.10233v1"
+    note: "Proposition 7.2 in arXiv version 1; only the entropy-certificate lemma is formalized."
 
 status:
   scope: >-
     The sole advertised result is
     TriangleNumerical.entropy_certificate :
     TriangleNumerical.EntropyCertificateProposition.
+    The counts below refer to the proved development. Challenge.lean contains
+    one deliberate reference theorem hole and is not imported by Target.
+    The paper's random-graph probability results are outside this scope.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
@@ -34,12 +46,18 @@ automation:
   methods:
     - method: "agent"
       framework: "Aristotle (Harmonic)"
+    - method: "agent"
+      framework: "OpenAI Codex"
+      notes: "Lean/Mathlib version migration, module-system port, and submission packaging."
 
 review:
   status: "self-assessed"
   notes: >-
     The submitting researcher reports a successful local Comparator run for
     the entropy-only theorem using the three standard permitted axioms.
+    During the Lean 4.35.0-rc2 migration, OpenAI Codex rebuilt all project
+    modules, checked the theorem against Challenge with Comparator, and
+    rechecked the exported solution with the independent NanoDa kernel.
 
 acknowledgements: >-
-  The proof uses Lean and Mathlib. The code was entirely written by Harmonic's Aristotle, with some feedback from the authors assisted by OpenAI's ChatGPT 5.6 Pro.
+  The proof uses Lean and Mathlib. The original proof code was written by Harmonic's Aristotle, with some feedback from the authors assisted by OpenAI's ChatGPT 5.6 Pro.

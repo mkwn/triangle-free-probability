@@ -1,4 +1,8 @@
-import TriangleNumerical.Deriv
+module
+
+public import TriangleNumerical.Deriv
+
+@[expose] public section
 
 /-!
 # Derivatives of the certificate along a segment
@@ -55,17 +59,17 @@ theorem hasDerivAt_line1 (p₁ p₂ p₃ a₁ a₂ a₃ τ : ℝ)
   have hu₂ := hasDerivAt_affine p₂ a₂ τ
   have hu₃ := hasDerivAt_affine p₃ a₃ τ
   have hH₁ : HasDerivAt (fun s : ℝ => H (p₁ + s * a₁)) (Real.log x * a₁) τ :=
-    by simpa [Function.comp] using (hasDerivAt_H h1).comp τ hu₁
+    by convert (hasDerivAt_H h1).comp τ hu₁ using 1; rfl
   have hH₂ : HasDerivAt (fun s : ℝ => H (p₂ + s * a₂)) (Real.log y * a₂) τ :=
-    by simpa [Function.comp] using (hasDerivAt_H h2).comp τ hu₂
+    by convert (hasDerivAt_H h2).comp τ hu₂ using 1; rfl
   have hH₃ : HasDerivAt (fun s : ℝ => H (p₃ + s * a₃)) (Real.log z * a₃) τ :=
-    by simpa [Function.comp] using (hasDerivAt_H h3).comp τ hu₃
+    by convert (hasDerivAt_H h3).comp τ hu₃ using 1; rfl
   have hG₁ : HasDerivAt (fun s : ℝ => bG h θ (p₁ + s * a₁)) (bGd h θ x * a₁) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bG h θ h1).comp τ hu₁
+    by convert (hasDerivAt_bG h θ h1).comp τ hu₁ using 1; rfl
   have hG₂ : HasDerivAt (fun s : ℝ => bG h θ (p₂ + s * a₂)) (bGd h θ y * a₂) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bG h θ h2).comp τ hu₂
+    by convert (hasDerivAt_bG h θ h2).comp τ hu₂ using 1; rfl
   have hG₃ : HasDerivAt (fun s : ℝ => bG h θ (p₃ + s * a₃)) (bGd h θ z * a₃) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bG h θ h3).comp τ hu₃
+    by convert (hasDerivAt_bG h θ h3).comp τ hu₃ using 1; rfl
   have hsum : HasDerivAt
       (fun s : ℝ => (H (p₁ + s * a₁) + H (p₂ + s * a₂) + H (p₃ + s * a₃)) / 3)
       ((Real.log x * a₁ + Real.log y * a₂ + Real.log z * a₃) / 3) τ :=
@@ -90,8 +94,7 @@ theorem hasDerivAt_line1 (p₁ p₂ p₃ a₁ a₂ a₃ τ : ℝ)
     ring
   have := (hsum.add hcube).sub hpair
   convert this using 1
-  simp only [lineD1]
-  ring
+  all_goals first | rfl | (simp only [lineD1]; ring)
 
 /-- The second directional derivative. -/
 theorem hasDerivAt_line2 (p₁ p₂ p₃ a₁ a₂ a₃ τ : ℝ)
@@ -106,23 +109,23 @@ theorem hasDerivAt_line2 (p₁ p₂ p₃ a₁ a₂ a₃ τ : ℝ)
   have hu₂ := hasDerivAt_affine p₂ a₂ τ
   have hu₃ := hasDerivAt_affine p₃ a₃ τ
   have hl₁ : HasDerivAt (fun s : ℝ => Real.log (p₁ + s * a₁)) (x⁻¹ * a₁) τ :=
-    by simpa [Function.comp] using (Real.hasDerivAt_log h1).comp τ hu₁
+    by convert (Real.hasDerivAt_log h1).comp τ hu₁ using 1; rfl
   have hl₂ : HasDerivAt (fun s : ℝ => Real.log (p₂ + s * a₂)) (y⁻¹ * a₂) τ :=
-    by simpa [Function.comp] using (Real.hasDerivAt_log h2).comp τ hu₂
+    by convert (Real.hasDerivAt_log h2).comp τ hu₂ using 1; rfl
   have hl₃ : HasDerivAt (fun s : ℝ => Real.log (p₃ + s * a₃)) (z⁻¹ * a₃) τ :=
-    by simpa [Function.comp] using (Real.hasDerivAt_log h3).comp τ hu₃
+    by convert (Real.hasDerivAt_log h3).comp τ hu₃ using 1; rfl
   have hG₁ : HasDerivAt (fun s : ℝ => bG h θ (p₁ + s * a₁)) (bGd h θ x * a₁) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bG h θ h1).comp τ hu₁
+    by convert (hasDerivAt_bG h θ h1).comp τ hu₁ using 1; rfl
   have hG₂ : HasDerivAt (fun s : ℝ => bG h θ (p₂ + s * a₂)) (bGd h θ y * a₂) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bG h θ h2).comp τ hu₂
+    by convert (hasDerivAt_bG h θ h2).comp τ hu₂ using 1; rfl
   have hG₃ : HasDerivAt (fun s : ℝ => bG h θ (p₃ + s * a₃)) (bGd h θ z * a₃) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bG h θ h3).comp τ hu₃
+    by convert (hasDerivAt_bG h θ h3).comp τ hu₃ using 1; rfl
   have hg₁ : HasDerivAt (fun s : ℝ => bGd h θ (p₁ + s * a₁)) (bGd2 h θ x * a₁) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bGd h θ h1).comp τ hu₁
+    by convert (hasDerivAt_bGd h θ h1).comp τ hu₁ using 1; rfl
   have hg₂ : HasDerivAt (fun s : ℝ => bGd h θ (p₂ + s * a₂)) (bGd2 h θ y * a₂) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bGd h θ h2).comp τ hu₂
+    by convert (hasDerivAt_bGd h θ h2).comp τ hu₂ using 1; rfl
   have hg₃ : HasDerivAt (fun s : ℝ => bGd h θ (p₃ + s * a₃)) (bGd2 h θ z * a₃) τ :=
-    by simpa [Function.comp] using (hasDerivAt_bGd h θ h3).comp τ hu₃
+    by convert (hasDerivAt_bGd h θ h3).comp τ hu₃ using 1; rfl
   have hlog : HasDerivAt
       (fun s : ℝ => (a₁ * Real.log (p₁ + s * a₁) + a₂ * Real.log (p₂ + s * a₂)
         + a₃ * Real.log (p₃ + s * a₃)) / 3)
@@ -157,9 +160,7 @@ theorem hasDerivAt_line2 (p₁ p₂ p₃ a₁ a₂ a₃ τ : ℝ)
     ring
   have := (hlog.add hcube).sub hpair
   convert this using 1
-  simp only [lineD2]
-  field_simp
-  try ring
+  all_goals first | rfl | (simp only [lineD2]; field_simp; try ring)
 
 /-- The second directional derivative as a quadratic form in the direction. -/
 theorem lineD2_eq (x y z a₁ a₂ a₃ : ℝ) (hx : x ≠ 0) (hy : y ≠ 0) (hz : z ≠ 0) :

@@ -1,6 +1,10 @@
-import Mathlib.Tactic
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import Mathlib.Tactic
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+
+@[expose] public section
 
 /-!
 Rational logarithm ladders: seed bounds, finite-ladder soundness, and

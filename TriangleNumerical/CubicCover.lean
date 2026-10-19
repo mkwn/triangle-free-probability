@@ -1,11 +1,15 @@
-import TriangleNumerical.SpatialEval
-import TriangleNumerical.LineDeriv
-import TriangleNumerical.Segment
-import TriangleNumerical.CoverTree
-import TriangleNumerical.CubicData
-import TriangleNumerical.ParamEval
-import TriangleNumerical.CubicChunk0
-import TriangleNumerical.CubicChunk1
+module
+
+public import TriangleNumerical.SpatialEval
+public import TriangleNumerical.LineDeriv
+public import TriangleNumerical.Segment
+public import TriangleNumerical.CoverTree
+public import TriangleNumerical.CubicData
+public import TriangleNumerical.ParamEval
+public import TriangleNumerical.CubicChunk0
+public import TriangleNumerical.CubicChunk1
+
+@[expose] public section
 
 /- ### From `HessEval` -/
 
@@ -518,12 +522,12 @@ theorem root_bracket {α s lo hi : ℝ} (hα : 0 ≤ α) (hs : 0 < s)
   have hmono := rootResidual_strictMonoOn hα
   constructor
   · by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     have := hmono (Set.mem_Ioi.2 hs) (Set.mem_Ioi.2 hlopos) hcon
     rw [hroot] at this
     linarith
   · by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     have := hmono (Set.mem_Ioi.2 hhipos) (Set.mem_Ioi.2 hs) hcon
     rw [hroot] at this
     linarith

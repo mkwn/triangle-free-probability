@@ -1,5 +1,9 @@
-import TriangleNumerical.Deriv
-import TriangleNumerical.LogLadder
+module
+
+public import TriangleNumerical.Deriv
+public import TriangleNumerical.LogLadder
+
+@[expose] public section
 
 /-!
 # Scalar auxiliary estimates for the analytic local lemmas
@@ -74,9 +78,9 @@ theorem mul_log_sq_monotoneOn :
         ((Real.log x) ^ 2 + x * (2 * Real.log x * x⁻¹)) x := by
     intro x hx
     have h1 : HasDerivAt (fun y : ℝ => (Real.log y) ^ 2) (2 * Real.log x * x⁻¹) x := by
-      have := (Real.hasDerivAt_log hx).pow 2
+      have := (Real.hasDerivAt_log hx).fun_pow 2
       simpa using this
-    simpa using (hasDerivAt_id x).mul h1
+    simpa using (hasDerivAt_id x).fun_mul h1
   apply monotoneOn_of_deriv_nonneg (convex_Ioc 0 (1 / 10))
   · apply ContinuousOn.mul continuousOn_id
     apply ContinuousOn.pow
@@ -123,7 +127,7 @@ theorem H_le_quad {u : ℝ} (hu : 19 / 20 ≤ u) : H u ≤ 10 / 19 * (u - 1) ^ 2
           funext z; ring
         rw [h0]
         simpa using ((hasDerivAt_id y).sub_const 1).const_mul (20 / 19 : ℝ)
-      simpa using h1.sub (Real.hasDerivAt_log hy)
+      convert h1.fun_sub (Real.hasDerivAt_log hy) using 1
     apply monotoneOn_of_deriv_nonneg (convex_Ici _)
     · apply ContinuousOn.sub (by fun_prop)
       exact Real.continuousOn_log.mono (by intro y hy; simp at hy ⊢; linarith)
@@ -212,7 +216,7 @@ theorem log_thirty_lt : Real.log 30 < 7 / 2 := by
     rw [← Real.exp_nat_mul]; norm_num
   have h30 : (30 : ℝ) < Real.exp (7 / 2) := by
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     have hpos : (0:ℝ) < Real.exp (7 / 2) := Real.exp_pos _
     have := pow_le_pow_left₀ hpos.le hcon 2
     rw [hsq] at this

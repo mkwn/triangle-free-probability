@@ -1,4 +1,8 @@
-import TriangleNumerical.Kernel
+module
+
+public import TriangleNumerical.Kernel
+
+@[expose] public section
 
 /-! # The materialised endpoint table (generated).
 

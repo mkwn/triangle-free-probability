@@ -1,4 +1,8 @@
-import Mathlib
+module
+
+public import Mathlib
+
+@[expose] public section
 
 /-!
 Mathematical statement of the entropy-certificate theorem. The six definitions
